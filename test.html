@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <style>
+  *{
+    margin: 0;
+    padding: 0;
+    list-style: none
+  }
+  </style>
+</head>
+<body>
+ <ul id="app">
+   <li @click="handleClick(index)"  class="c" v-for="(item, index) in list" :key="index">{{item}}</li>
+</ul> 
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      list:['click','click','click','click','click']
+    },
+    methods:{
+      handleClick(index){
+        console.log(index)
+        this.list.splice(index,1)
+        console.log(index)
+      }
+    }
+  })
+  // document.querySelectorAll('.c').forEach((element,index)=>{
+  //   element.addEventListener("click",()=>{
+
+  //     console.log(index)
+  //   })
+  // })
+
+</script>
+</body>
+</html>
