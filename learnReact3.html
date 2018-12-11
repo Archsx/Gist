@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+
+    <script>
+      //上一节我们已经定义了一个类，通过实例化这个类，调用实例的方法来返回字符串了
+      //但是往往不方便在字符串上绑定事件
+      //现在的思路是 调用render函数的之前，先定义一个额外的方法函数，这个函数把字符串作为新建的dom节点的innerHTML
+      //然后在这个函数中给这个DOM绑定事件，并返回这个dom，然后wrapper这个div拿到这个dom之后append就行了
+
+      function createDomFromString(str) {
+        let div = document.createElement("div");
+        div.innerHTML = str;
+        return div;
+      }
+
+      // class LikeButton {
+      //   constructor() {
+      //     this.liked = false;
+      //   }
+      //   render() {
+      //     let self = this;
+      //     this.el = createDomFromString(`
+      //                 <button class="like-btn">
+      //                   <span class="like-text">点赞</span>
+      //                 </button>`);
+      //     this.el.addEventListener("click", function() {
+      //       self.liked = !self.liked;
+      //       if (self.liked) {
+      //         this.querySelector(".like-text").innerHTML = "取消";
+      //       } else {
+      //         this.querySelector(".like-text").innerHTML = "点赞";
+      //       }
+      //     });
+      //     return this.el;
+      //   }
+      // }
+
+      //这里的函数可以再封装一下
+      //这里用this.el存储这个新建的dom节点，可以通过this.el方便的访问这个节点（如let text = this.el.querySelector('.like-text'）这句，
+      //用this.changeText来指向这个更改text的函数
+      //下面的bind是亮点
+      //总的来说，最重要的是，这里的中心是这个实例化的对象，dom和这个对象的属性挂钩，比如用instance.state.liked来存储是否是喜欢的状态。很有意思
+      //而jquery的直接之处就在于直接操作dom
+
+      class LikeButton {
+        constructor() {
+          this.state = {
+            liked :false
+          }
+        }
+        changeText() {
+          this.state.liked = !this.state.liked;
+          let text = this.el.querySelector(".like-text");
+          text.innerHTML = this.state.liked ? '取消' :'点赞'
+        }
+        render() {
+          this.el = createDomFromString(`
+                  <button class="like-btn">
+                    <span class="like-text">
+                      点赞
+                    </span>
+                  </button>
+                `);
+          this.el.addEventListener("click", this.changeText.bind(this));
+          return this.el
+        }
+      }
+
+      var likeButton1 = new LikeButton();
+      document.querySelector(".wrapper").appendChild(likeButton1.render());
+
+      var likeButton2 = new LikeButton();
+      document.querySelector(".wrapper").appendChild(likeButton2.render());
+    </script>
+  </body>
+</html>

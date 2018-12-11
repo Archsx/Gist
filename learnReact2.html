@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- <button class="like-btn">
+      <span class="like-text">点赞</span>
+    </button> 这一次使用的方法还是直接修改元素的innerHTML，非常暴力，所以这里被注释 -->
+  </div>
+  <script>
+    class LikeButton {
+      render(){
+        return `
+          <button class="like-btn" onclick="test()">
+            <span class="like-text">点赞</span>
+          </button>
+        `
+      }
+    }
+    const wrapper = document.querySelector('.wrapper')
+    const likeButton = new LikeButton()
+    wrapper.innerHTML = likeButton.render()
+    function test(){
+      console.log('xxx')
+    }
+    //这一次修改的地方是，这已经被抽象成一个类了，这个类返回字符串
+    //就可以实现更简单一点的复用了，想想那个$.jiframe函数，
+    //也是这样，返回字符串，只不过这里还不能对btn绑定事件，(事实证明上面的写法也行的，也能监听click事件，只是可能麻烦了一点)
+    //而$.jiframe那个函数则是手动的通过选取'.xxx'监听事件
+  </script>
+</body>
+</html>

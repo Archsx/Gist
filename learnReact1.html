@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <button class="like-btn"><span class="like-text">点赞</span></button>
+    </div>
+    <script>
+      //最原始的写法，设置变量liked以记录状态，
+      //缺点很明显 无法复用，要复用只能完整的复制粘贴全部代码（好像很像我现在的工作。。。）
+      var liked = false;
+      document
+        .querySelector(".like-btn")
+        .addEventListener("click", function(e) {
+          liked = !liked;
+          if (liked) {
+            document.querySelector(".like-text").innerHTML = "取消";
+          } else {
+            document.querySelector(".like-text").innerHTML = "点赞";
+          }
+        });
+    </script>
+  </body>
+</html>
