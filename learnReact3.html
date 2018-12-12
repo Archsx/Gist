@@ -69,7 +69,7 @@
                     </span>
                   </button>
                 `);
-          this.el.addEventListener("click", this.changeText.bind(this));
+          this.el.addEventListener("click", this.changeText.bind(this));// 这一句很关键，因为这里是赋值，bind(this)这里的this是调用render函数的实例
           return this.el
         }
       }

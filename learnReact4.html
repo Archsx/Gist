@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <script>
+      //上一节，我们把对于dom的操作封装成changeText这个方法
+      //这一节主要有两个转变，1>不再手动通过状态判断来修改dom，而是直接根据新的状态来生成新的dom(完整的逻辑应该是，监听事件更改状态，调用setState并传入新的状态并更改为新的状态,然后再调用render函数生成新的dom)
+      //所以render函数里面，使用了模板字符串，在这个模板字符串中体现状态的更改
+      //2>使用方式的更改，以前是wrapper里面append就行，现在因为是生成一个新的，所以变成了添加新的节点 删除旧的节点
+      const createDomFromString = function(str) {
+        let div = document.createElement("div");
+        div.innerHTML = str;
+        return div;
+      };
+      class LikeButton {
+        constructor() {
+          this.state = {
+            isLiked: false
+          };
+        }
+        setState(newState) {
+          let oldDom = this.el;
+          this.state = newState;
+          this.render();
+          if (this.onStateChange) {
+            this.onStateChange(oldDom, this.el);
+          }
+        }
+        render() {
+          this.el = createDomFromString(`
+                  <button class="like-btn">
+                    <span class="like-text">
+                      ${this.state.isLiked ? "取消" : "点赞"}
+                    </span>
+                  </button>
+                `);
+          this.el.addEventListener("click", () => {
+            this.setState({
+              isLiked: !this.state.isLiked
+            });
+          });
+          return this.el;
+        }
+      }
+
+      let wrapper = document.querySelector(".wrapper");
+      let likeButton = new LikeButton();
+      likeButton.onStateChange = function(oldDom, newDom) {
+        wrapper.insertBefore(newDom, oldDom);
+        wrapper.removeChild(oldDom);
+      };
+      wrapper.appendChild(likeButton.render());
+      //写完这段代码之后有三个感悟1> 对insertBefore这个方法不熟悉，该方法是parentNode.insertBefore(newNode,referenceNode),
+      //这里和以往写的jq不同的是，以往的jq几乎是$('.xxx')来获取的referenceNode和newNode，
+      //但是这里由于我们可以直接通过this.el访问到旧的Dom并创建了新的dom，这样就直接找到了referenceNode和newNode简单多了
+      //2>写的时候我老是会想到创建了新的dom，onStateChange怎么才能一直执行下去，后来才想到新的dom(this.el)不过是实例的一个属性罢了
+      //onStateChange是写在实例上面的。这里又体现了和以前的直接操作dom思想的不同，早在上一节我们就体现了，用js对象和dom产生关联，
+      //通过js对象来控制dom的变化
+      //3>addEventListener的时候，体现出了箭头函数的使用，绑定了this的值，很开心。
+
+    </script>
+  </body>
+</html>
