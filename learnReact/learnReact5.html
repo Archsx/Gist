@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <script>
+      //上一节，我们已经基本实现了一个button类，这节需要的是将这个类抽象一下，提炼出共有的部分，然后让其他的类继承
+      //回顾下，上一节的过程是 点击按钮->触发setState函数->触发render函数形成新的dom
+      //                                 |
+      //                           触发onStateChange函数，替换旧的dom
+
+      //所以共有的是 setState函数
+
+      //照例还是有个createDomFromString这样的工具函数
+      const createDomFromString = function(str) {
+        let div = document.createElement("div");
+        div.innerHTML = str;
+        return div;
+      };
+
+      class Component {
+        constructor(state) {
+          this.state = state;
+        }
+        setState(newState) {
+          let oldDom = this.el;
+          this.state = newState;
+          this.el = this.renderDom();
+          if (this.onStateChange) {
+            this.onStateChange(oldDom, this.el);
+          }
+        }
+        renderDom() {
+          return this.render();
+        }
+      }
+
+      class LikeButton extends Component {
+        constructor() {
+          super({
+            isLiked: false
+          });
+        }
+        render() {
+          this.el = createDomFromString(`
+            <button class="like-btn">
+              <span class="like-text">
+              ${
+                this.state
+                  .isLiked
+                  ? "取消"
+                  : "点赞"
+              }
+              </span>
+            </button>
+          `);
+          this.el.addEventListener('click',this.onClick.bind(this))
+          return this.el
+        }
+        onClick(){
+          this.setState(
+            {
+              isLiked:!this.state.isLiked
+            })
+        }
+      }
+
+      const wrapper = document.querySelector('.wrapper')
+      let likeButton = new LikeButton()
+      likeButton.onStateChange = function(oldDom,newDom){
+        wrapper.insertBefore(newDom,oldDom)
+        wrapper.removeChild(oldDom)
+      }
+      wrapper.appendChild(likeButton.renderDom())
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box" id="content">
+      <div class="title">Hello</div>
+      <button>Click</button>
+    </div>
+
+    <script>
+      //这节是了解JSX
+      //每个dom元素都可以用JavaScript对象来表示，Dom元素包含的信息只有三个:标签名 属性 子元素
+
+    let foo =   {
+        tag:'div',
+        attrs:{className:'box',id:'content'},
+        children:[
+          {
+            tag:'div',
+            attrs:{className:'title'},
+            children:['Hello']//和下面的一样，假如子元素只有文字的话，也是用数组来表示['子元素的文字']，这个和Vue视频里面的很像
+          },
+          {
+            tag:'button',
+            attrs:null,
+            children:['Click']
+          }
+        ]  
+      }
+      //结论，我们可以用js对象描述HTML表示的UI信息，但是HTML更直观
+      //JSX是一种语法，这是在JavaScript中写HTML的语法
+      //编译的时候，这种JSX结构会被转化为JavaScript对象
+
+      class Header extends Component {
+        render(){
+          return (
+            <div>
+              <h1 clasName='title'></h1>
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(<Header />,document.getElementById('root'))
+
+      class Header extends Component {
+        render(){
+          return (
+            React.createElement("div",
+            null,
+            React.createElement("h1",
+            {className:'title'},
+            "react小书" //发现了吗，这里的语法和上面的稍微有所不同，没有用数组，难道上面就是Vue中的render函数而这里是JSX?
+            
+            )
+            
+            )
+          )
+        }
+      }
+
+      ReactDOM.render(
+        React.createElement(Header,null),
+        document.getElementById('root')
+      )
+      //ReactDOM.render就是把组件渲染并构造DOM树，然后插到页面上某个特定的元素上面
+      //这里是不是和前面的mount函数很像？
+      //JSX其实就是JavaScript对象
+
+      //JSX -----Babel编译+React.js构造----->JavaScript对象结构--------ReactDOM.render--------->DOM元素 --------->插入页面
+
+
+    </script>
+  </body>
+</html>

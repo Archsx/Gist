@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <script>
+      //这一节和上一节有所重复，原因是上一节的代码和教程上的代码相比仍有可以改进的地方
+
+      const createDomFromString = function(str) {
+        let div = document.createElement("div");
+        div.innerHTML = str;
+        return div;
+      };
+      const mount = function(component, wrapper) {
+        component.onStateChange = function(oldEl,newEl){
+          wrapper.insertBefore(newEl,oldEl)
+          wrapper.removeChild(oldEl)
+        }
+        wrapper.appendChild(component.renderDOM())
+      };
+      class Component {
+        constructor(props = {}) {
+          this.props = props;
+        }
+        setState(newState) {
+          let oldEl = this.el;
+          this.state = newState;
+          this.renderDOM();
+          if (this.onStateChange) {
+            this.onStateChange(oldEl, this.el);
+          }
+        }
+        renderDOM() {
+          this.el = createDomFromString( this.render());
+          if(this.onClick){
+            this.el.addEventListener('click',this.onClick.bind(this))
+          }
+          return this.el
+        }
+      }
+      class LikeButton extends Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isLiked: false
+          };
+        }
+        render() {
+          return `
+                  <button class='like-btn'>
+                    <span class='like-text'>
+                      ${this.state.isLiked ? '取消':'点赞'}
+                    </span>
+                  </button>
+                `;
+        }
+        onClick(){
+          this.setState({
+            isLiked:!this.state.isLiked
+          })
+        }
+      }
+
+      mount((new LikeButton()),document.querySelector('.wrapper'))
+
+      class LikeButton1 extends Component {
+    constructor (props) {
+      super(props)
+      this.state = { isLiked: false }
+    }
+
+    onClick () {
+      this.setState({
+        isLiked: !this.state.isLiked
+      })
+    }
+
+    render () {
+      return `
+        <button class='like-btn' style="background-color: ${this.props.bgColor}">
+          <span class='like-text'>
+            ${this.state.isLiked ? '取消' : '点赞'}
+          </span>
+          <span>👍</span>
+        </button>
+      `
+    }
+  }
+
+  mount(new LikeButton1({ bgColor: 'red' }),document.querySelector('.wrapper'))
+  //原来是这样，把常量设置在props中，而变量放在state中，毕竟只有改变state(this.setState)才能调用组件的renderDOM函数。
+  //而且这样的话在写onClick的时候，this.setState要方便一些，试想只有state而没有props的话，那state就有两个属性:isLiked和bgColor
+  //而setState的时候就必须再写一次bgColor的值，如果属性多起来的话无疑更痛苦，所以这样设计成state和props还是有好处的
+    </script>
+  </body>
+</html>
