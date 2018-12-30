@@ -1,0 +1,31 @@
+    .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+    }
+
+
+    .icon-right{
+        transform: rotate(180deg)
+    }
+
+
+    .showContainer{
+        width: 356px;
+        height: 200px;
+        border: 10px solid maroon;
+        background-color: #AAA;
+        margin: 50px auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+
+    
+
+
+
+
+    
