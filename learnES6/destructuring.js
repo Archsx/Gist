@@ -15,8 +15,6 @@ console.log(a,b,c) // 'h' 'e' 'l' 这样写太迷惑了 还是不要了吧
 /* 
     下面的内容和解构无关，是关于函数默认参数的
 */
-
-
 function foo(a=1,b=2){
     console.log(a,b)
 }
@@ -162,9 +160,43 @@ function foo({a=1,b=2}={a:1,b:2}){
     console.log(a,b)
 }
 
-// function foo({a=1,b=2}={}){
-//     console.log(a,b)
-// }
 
-foo()
-foo({})
+// 上面的写法是我自己写的，但是完全不用这么做，下面的才是最好的写法
+
+
+
+
+function foo({a=1,b=2}={}){
+    console.log(a,b)
+}
+
+
+/*
+    此时什么都没有传，foo函数的参数为一个对象，默认为{}
+    此时相当于const {a=1,b=2} = {} 这里这句来源于{a=1,b=2} ={}这个表达式
+    所以此时 a为1，b为2
+
+*/
+
+foo()//1,2
+
+
+
+/**
+ * 
+ * @param {*} param0 
+ * 下面的写法，由于传入了一个空对象，所以这里不会采用foo函数的默认值（虽然默认值也是一个空对象）
+ * 这时任然相当于const {a=1,b=2} = {} 但是这个和上面那个是不同的，这里是赋值，等式右边的空对象来源于foo({})的{}
+ */
+
+
+foo({})//1,2
+
+
+
+
+
+function foo({a=1,b=2}){
+    console.log(a,b)
+}
+foo({a:undefined})
