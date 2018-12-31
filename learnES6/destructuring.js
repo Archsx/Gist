@@ -162,9 +162,9 @@ function foo({a=1,b=2}={a:1,b:2}){
     console.log(a,b)
 }
 
-function foo({a=1,b=2}={}){
-    console.log(a,b)
-}
+// function foo({a=1,b=2}={}){
+//     console.log(a,b)
+// }
 
-foo()//1,2
-foo({})//1,2
+foo()
+foo({})
