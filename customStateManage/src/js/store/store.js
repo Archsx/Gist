@@ -69,6 +69,7 @@ export default class Store {
     //和上面的console.groupCollapsed遥相呼应
     console.groupEnd();
 
+
     return true;
   }
   //注意，我们这里定义的是disptach,而工作中因为有vuex帮我们定义了dispatch，
@@ -81,6 +82,7 @@ export default class Store {
   //接下来是写commit,commit和上面的dispatch很像
 
   commit(mutationName, payload) {
+    console.log('bb')
     let self = this;
 
     if (typeof self.mutations[mutationName] !== "function") {

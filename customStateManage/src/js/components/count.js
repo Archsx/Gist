@@ -6,7 +6,8 @@ export default class Count extends Component {
   constructor(){
     super({
       store,
-      element:document.querySelector('.js-count')
+      // element:document.querySelector('.js-count')
+      element:document.querySelector('.totalNumber')
     })
   }
   render(){
