@@ -13,3 +13,9 @@ var regex = /a[123]b/g
 var str = 'a0b a1b a2b a3b a4b'
 console.log(str.match(regex))
 //['a1b','a2b','a3b']
+
+// 字符组
+//范围表示 [a-z] [1-6a-fG-M]
+//但是假如真的是想匹配a,-,z这三个字符，需要写成[a\-z] [-az] [az-]
+
+//模糊
