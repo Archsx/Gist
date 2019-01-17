@@ -6,46 +6,55 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <link rel="stylesheet" href="./index.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <div class="container">
       <section class="header">
         <h2>Done List</h2>
         <p>A list of things that you have achieved today</p>
-        <p><strong>Note:</strong>The data isn't stored,so it will disappear if you reload</p>
+        <p>
+          <strong>Note:</strong>The data isn't stored,so it will disappear if
+          you reload
+        </p>
       </section>
       <section class="summary">
         <div class="itemsWrapper">
           <h3>What you've done</h3>
-          <ul>
-            <li>
-              <span>learn react</span>
-              <span><i class="far fa-trash-alt"></i></span>
-            </li>
-            <li>
-              <span>learn vue</span>
-              <span><i class="far fa-trash-alt"></i></span>
-            </li>
-            <li>
-              <span>learn typescript</span>
-              <span><i class="far fa-trash-alt"></i></span>
-            </li>
-          </ul>
+          <div class="ul-wrapper">
+            <ul>
+              <li>
+                <span>learn react</span>
+                <span><i class="far fa-trash-alt"></i></span>
+              </li>
+              <li>
+                <span>learn vue</span>
+                <span><i class="far fa-trash-alt"></i></span>
+              </li>
+              <li>
+                <span>learn typescript</span>
+                <span><i class="far fa-trash-alt"></i></span>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="totalNumber">
           <h3>You've done</h3>
           <h3><strong>0</strong></h3>
           <p>things today<i class="far fa-sad-tear"></i></p>
-
-
         </div>
       </section>
       <section class="add">
         <label for="addIpt" style="display:block">Add a new Item</label>
-        <input type="text" id="addIpt">
+        <input type="text" id="addIpt" />
         <span class="cPointer addBtn">Add</span>
       </section>
     </div>
   </body>
+  <script type="module" src="./src/js/main.js"></script>
 </html>

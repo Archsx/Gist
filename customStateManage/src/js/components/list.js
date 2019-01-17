@@ -1,4 +1,4 @@
-import Component from './lib/component.js'
+import Component from '../lib/component.js'
 import store from '../store/index.js'
 
 
@@ -7,7 +7,8 @@ export default class List extends Component{
   constructor(){
     super({
       store,
-      element:document.querySelector('.js-items')
+      // element:document.querySelector('.js-items')
+      element:document.querySelector('.ul-wrapper')
     })
   }
 
