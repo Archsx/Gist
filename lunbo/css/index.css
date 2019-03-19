@@ -1,6 +1,6 @@
     .icon {
-        width: 1em;
-        height: 1em;
+        width: 2em;
+        height: 2em;
         vertical-align: -0.15em;
         fill: currentColor;
         overflow: hidden;
@@ -33,7 +33,42 @@
         min-width: 100%;
         /* height: 100% */
     }
+    .left-triangle{
+        position: absolute;
+        top: 80px;
+        cursor: pointer;
+        left: 0;
+    }
+    .right-triangle {
+        position: absolute;
+        top: 80px;
+        cursor: pointer;
+        right: 0;
+    }
+    .left-triangle ,.right-triangle{
+        display: none
+    }
+    .showContainer:hover .left-triangle,.showContainer:hover .right-triangle{
+        display: block
+    }
 
+    .dots{
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        text-align: center;
+        width: 100%
+    }
+
+    .dots .dot{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ccc;
+        margin-right: 10px;
+        cursor: pointer;
+    }
 
 
 
