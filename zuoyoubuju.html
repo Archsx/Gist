@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .body{
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /*
+            不管哪一种，左侧都是定宽的，右侧则不用写宽度，而是写死margin-left，预留好与左侧的距离
+        
+        */
+
+
+
+        /*这是第一种 浮动加左margin*/
+
+        /* .left{
+            width: 200px;
+            height: 400px;
+            background-color: aqua;
+            float: left
+        }
+
+        .right{
+            margin-left: 220px;
+            height: 800px;
+            background-color: blueviolet
+        } */
+        
+
+        /*
+            第二种则是利用绝对定位，但是这样的话body则是要写成相对定位的形式
+            不然绝对定位没有相对应的点
+        */
+
+
+        .left{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 400px;
+            background-color: aqua;
+        }
+
+        .right{
+            margin-left: 200px;
+            height: 800px;
+            background-color: blueviolet
+        }
+
+
+
+
+    
+    </style>
+</head>
+<body>
+    <div class="body">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+</html>

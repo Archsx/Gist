@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="btn-wrapper">
+
+    </div>
+
+    <script type="module">
+        import * as Button from './button1.js'
+        import * as util from './util.js'
+        util.default.mount(document.querySelector('#btn-wrapper'),(new Button.default()))
+        // const wrapper = document.querySelector('#btn-wrapper')
+        // let btn = new Button.default()
+        // btn.onStateChange = function(oldDOM,newDOM){
+        //   wrapper.insertBefore(newDOM,oldDOM)
+        //   wrapper.removeChild(oldDOM)
+        // }
+        // wrapper.appendChild(btn.render())
+    </script>
+
+
+</body>
+</html>

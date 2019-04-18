@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        /*
+
+        双飞翼布局有一点问题，就是左中右的顺序需要变化，左边的负margin值为-100%，右边的负margin值为自己的宽度
+        注意这里container的宽度是100%,而content的内容才是需要设置margin值(可能是左边的宽度和右边的宽度)
+        */
+        .container,.left,.right{
+            float: left;
+        }
+        .container{
+            width: 100%;
+            height: 500px;
+
+        }
+        .left{
+            width: 150px;
+            margin-left: -100%;
+            background-color: brown;
+            height: 200px
+        }
+        .right{
+            width: 150px;
+            margin-left: -150px;
+            height: 200px;
+            background-color: yellow
+        }
+        .content{
+            margin: 0 150px;
+            background-color: blueviolet;
+            height: 500px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+        </div>
+    </div>
+    <div class="left">
+    </div>
+    <div class="right">
+    </div>
+</body>
+</html>

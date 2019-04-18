@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+     *{
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box
+     }
+
+     .body{
+         max-width: 1200px;
+         margin:  0 auto;
+         border: 1px solid red
+     }   
+
+
+     /*
+        原来是这样，以前不懂为什么在bootstrap里面,.row这个类需要设置左右负margin,而且这个负margin的值恰好又是row里面的div的padding的值
+        可能是bootstrap为了兼容多列的情况吧，以前的时候，对于多列，中间有确定的间隔，而一行的开头和结尾的元素却只有一边有间隔这样的需求不知道怎么做，
+        现在才知道可以利用row容器设置左右负margin抵消开头和结尾的那一侧的间距
+     
+     */
+
+     ul{
+         display: flex;
+         flex-wrap: wrap;
+         list-style: none;
+         margin-left: -10px;
+         margin-right: -10px
+     }
+     ul li{
+        width: 33.333%;
+        padding:  0 10px;
+        margin-bottom: 10px;
+        /* border: 1px solid black; */
+        height: 200px;
+        background-color: blueviolet;
+        background-clip: content-box
+     }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="body">
+        <h2>对齐啦啦</h2>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+
+    </div>
+</body>
+</html>

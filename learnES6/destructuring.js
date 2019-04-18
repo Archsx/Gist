@@ -29,7 +29,7 @@ foo() //1 , 2
 
 
 function bar({name="sb",age=12,sex}){
-    let baz = {zk
+    let baz = {
         name,
         age,
         sex
