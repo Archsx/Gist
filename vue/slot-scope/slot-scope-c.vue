@@ -7,7 +7,9 @@
                     {{methodFromP(contact)}}
                 </div>
                 <div>
-                    <slot :contact="contact"></slot>
+                    <slot :contact="contact">
+                        
+                    </slot>
                 </div>
                 <div>
                     {{contact.email}}
